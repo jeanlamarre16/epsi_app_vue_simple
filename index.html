@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Parking</title>
+    <style>
+        /* Vos styles CSS ici */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #add8e6; /* Bleu clair */
+        }
+
+        header {
+            background-color: #ff6347; /* Rouge */
+            color: #fff;
+            padding: 1em;
+            text-align: center;
+        }
+
+        nav {
+            background-color: #dc143c; /* Rouge foncé */
+            color: #fff;
+            padding: 0.5em;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        footer {
+            background-color: #ff6347; /* Rouge */
+            color: #fff;
+            padding: 1em;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="demovue">
+        <header>
+            <h1>Mon Parking</h1>
+        </header>
+    
+
+        <main>
+            <h2>La solution parking qui vous simplifie la vie</h2>
+            <p>Ce site vous permet de localiser un endroit où vous pouvez vous garer en toute tranquilité. Plus besoin de tourner en rond des heures et des heures ! <br /> Plus besoin de vous soucier sur l'endroit où vous allez vous allez vous garer.</p>
+
+            <!-- Section de disponibilité -->
+
+            <section>
+                <h3>Disponibilité de parking</h3>
+                <ul>
+                    <li v-for="place in places">
+                        <a :href="place.grp_nom">{{ place.grp_nom }}</a>
+                        <p>Capacité : {{place.disponibilite}}</p>
+                        <p>Places disponibles : {{place.grp_disponible}}</p>
+                        <p>Géolocalisation : {{place.location}}</p>
+                    </li>
+                </ul>
+                <!--p v-if="places">Places disponibles!</p>
+                <p v-else>Toutes les places sont occupées pour le moment.</p -->
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2023 Mon Parking. Tous droits réservés.</p>
+        </footer>
+    </div>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+		<script src="https://unpkg.com/vue@3"></script>
+
+		<script>
+			const apiURL ="https://data.nantesmetropole.fr/api/explore/v2.1/catalog/datasets/244400404_parkings-publics-nantes-disponibilites/records?limit=20";
+
+			Vue.createApp({
+				data() {
+					return {
+						places: [],
+					};
+				},
+
+				created: function () {
+					this.getData();
+				},
+
+				methods: {
+					getData: function () {
+						axios
+							.get(apiURL)
+							.then((response) => {
+                                console.log(response.data.results)
+								this.places = response.data.results
+							})
+							.catch(function (error) {
+								console.log("Problème de récupération de données")
+								console.log(error);
+							});
+					},
+				},
+			}).mount("#demovue");
+		</script>
+</body>
+</html>
