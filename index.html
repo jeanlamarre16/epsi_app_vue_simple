@@ -5,23 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mon Parking</title>
     <style>
-        /* Vos styles CSS ici */
+    
         body {
             font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #add8e6; /* Bleu clair */
+            background-color: #add8e6;
         }
 
         header {
-            background-color: #ff6347; /* Rouge */
+            background-color: #ff6347;
             color: #fff;
             padding: 1em;
             text-align: center;
         }
 
         nav {
-            background-color: #dc143c; /* Rouge foncé */
+            background-color: #dc143c; 
             color: #fff;
             padding: 0.5em;
             text-align: center;
@@ -43,7 +43,7 @@
         }
 
         footer {
-            background-color: #ff6347; /* Rouge */
+            background-color: #ff6347;
             color: #fff;
             padding: 1em;
             text-align: center;
@@ -52,7 +52,7 @@
 </head>
 <body>
 
-    <div id="demovue">
+    <div id="demo-vue" v-cloak>
         <header>
             <h1>Mon Parking</h1>
         </header>
@@ -60,7 +60,9 @@
 
         <main>
             <h2>La solution parking qui vous simplifie la vie</h2>
-            <p>Ce site vous permet de localiser un endroit où vous pouvez vous garer en toute tranquilité. Plus besoin de tourner en rond des heures et des heures ! <br /> Plus besoin de vous soucier sur l'endroit où vous allez vous allez vous garer.</p>
+            <p>Ce site vous permet de localiser un endroit où vous pouvez vous garer en toute tranquilité. Plus besoin de tourner en rond des heures et des heures ! 
+                <br /> Plus besoin de vous soucier sur l'endroit où vous allez vous allez vous garer.
+            </p>
 
             <!-- Section de disponibilité -->
 
@@ -68,7 +70,7 @@
                 <h3>Disponibilité de parking</h3>
                 <ul>
                     <li v-for="place in places">
-                        <a :href="place.grp_nom">{{ place.grp_nom }}</a>
+                        <b :href="place.grp_nom">{{ place.grp_nom }}</b>
                         <p>Capacité : {{place.disponibilite}}</p>
                         <p>Places disponibles : {{place.grp_disponible}}</p>
                         <p>Géolocalisation : {{place.location}}</p>
@@ -115,7 +117,7 @@
 							});
 					},
 				},
-			}).mount("#demovue");
+			}).mount("#demo-vue");
 		</script>
 </body>
 </html>
